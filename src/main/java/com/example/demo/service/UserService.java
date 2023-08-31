@@ -20,4 +20,9 @@ public class UserService {
     return list;
   }
 
+  public void save(User user) {
+    userRepository.save(user);
+
+  }
+
 }

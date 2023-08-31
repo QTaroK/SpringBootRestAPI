@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.example.demo.dto.UserDto;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,6 +29,16 @@ public class User {
 	 * ユーザーメールアドレス
 	 */
 	private String userEmailAddress;
+
+	public User() {
+
+	}
+
+	public User(UserDto userDto) {
+		this.userId = userDto.getUserNumber();
+		this.userName = userDto.getUserName();
+		this.userEmailAddress = userDto.getUserEmailAddress();
+	}
 
 	public int getUserId() {
 		return userId;
