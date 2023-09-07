@@ -25,4 +25,13 @@ public class UserService {
 
   }
 
+  public User findById(int id) {
+    User user = userRepository.findById(id).get();
+    return user;
+  }
+
+  public void deleteById(int id) {
+    userRepository.deleteById(id);
+  }
+
 }
