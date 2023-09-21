@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.User;
 import com.example.demo.dto.UserDto;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.service.UserService;
 
 import java.util.List;
@@ -36,8 +37,14 @@ public class UserRestController {
   }
 
   @GetMapping(value = "user")
-  public UserDto getUser(@RequestParam int userNumber) {
-    User user = userService.findById(userNumber);
+  public UserDto getUser(@RequestParam int userNumber) throws UserNotFoundException {
+    User user = new User();
+    try {
+      user = userService.findById(userNumber);
+    } catch (UserNotFoundException e) {
+      throw e;
+    }
+
     UserDto userDto = new UserDto(user);
     return userDto;
 
