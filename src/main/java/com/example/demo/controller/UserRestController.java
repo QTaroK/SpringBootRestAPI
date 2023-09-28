@@ -16,12 +16,19 @@ import com.example.demo.dto.UserDto;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.service.UserService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
 import java.util.List;
 
 @Validated
 @RestController
 @RequestMapping(value = "/api")
 public class UserRestController {
+
+  public static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
   @Autowired
   private UserService userService;
@@ -34,6 +41,11 @@ public class UserRestController {
   @PostMapping(value = "add")
   public UserDto add(@RequestBody @Valid UserDto userDto) throws Exception {
     User user = new User(userDto);
+
+    logger.error("OK");
+    logger.warn("OK");
+    logger.info("OK");
+
     userService.save(user);
 
     return userDto;
