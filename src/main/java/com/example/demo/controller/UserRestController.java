@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.annotation.Validated;
+import jakarta.validation.Valid;
 
 import com.example.demo.model.User;
 import com.example.demo.dto.UserDto;
@@ -16,6 +18,7 @@ import com.example.demo.service.UserService;
 
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping(value = "/api")
 public class UserRestController {
@@ -29,7 +32,7 @@ public class UserRestController {
   }
 
   @PostMapping(value = "add")
-  public UserDto add(@RequestBody UserDto userDto) {
+  public UserDto add(@RequestBody @Valid UserDto userDto) throws Exception {
     User user = new User(userDto);
     userService.save(user);
 

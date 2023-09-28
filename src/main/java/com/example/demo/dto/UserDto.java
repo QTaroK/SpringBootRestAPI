@@ -1,6 +1,7 @@
 package com.example.demo.dto;
 
 import com.example.demo.model.User;
+import jakarta.validation.constraints.*;
 
 /**
  * 会員クラス
@@ -10,21 +11,26 @@ public class UserDto {
 	/**
 	 * ユーザーNo
 	 */
+
 	private int userNumber;
 
 	/**
 	 * ユーザー名
 	 */
+	@NotEmpty
 	private String userName;
 
 	/**
 	 * ユーザー住所
 	 */
+	@NotEmpty
 	private String userAddress;
 
 	/**
 	 * ユーザーメールアドレス
 	 */
+	@Email
+	@NotEmpty
 	private String userEmailAddress;
 
 	public UserDto() {
