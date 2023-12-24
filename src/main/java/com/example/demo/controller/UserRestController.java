@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,13 +20,14 @@ import com.example.demo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 @Validated
 @RestController
 @RequestMapping(value = "/api")
+@CrossOrigin
 public class UserRestController {
 
   public static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -68,6 +70,13 @@ public class UserRestController {
   @DeleteMapping(value = "user")
   public void getDeleteuser(@RequestParam int deleteUserNumber) {
     userService.deleteById(deleteUserNumber);
+  }
+
+  // 画像をapiでアップロード
+  // multipartRequest
+  @PostMapping(value = "upload")
+  public void upload(@RequestParam("file") MultipartFile file) {
+    userService.upload(file);
   }
 
 }

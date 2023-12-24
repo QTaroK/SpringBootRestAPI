@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.FileOutputStream;
+import java.io.File;
+import java.io.IOException;
 
 @Service
 public class UserService {
@@ -40,6 +44,24 @@ public class UserService {
 
   public void deleteById(int id) {
     userRepository.deleteById(id);
+  }
+
+  // ファイルアップロード
+  // MultipartFile
+  // localの指定の場所に保存
+  public void upload(MultipartFile file) {
+    try {
+      // 指定の場所にuuidのフォルダを作成してその場所に画像を保存
+      String path = "/Users/kiuchi_tarou/MENTA/一弥/demo/sample/";
+      String uuid = java.util.UUID.randomUUID().toString();
+      String file_name = uuid + "_" + file.getOriginalFilename();
+      File uploadFile = new File(path + file_name);
+      FileOutputStream fos = new FileOutputStream(uploadFile);
+      fos.write(file.getBytes());
+      fos.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
 }
